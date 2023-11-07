@@ -5,8 +5,10 @@ import { taskContext } from './taskContext'
 const List =()=>{
     // Object Destructuring 
     const {taskItems , setTaskItems}= useContext(taskContext);
-    return(
-        <div className='lists'>
+     // Conditional Rendering
+     if(taskItems.length){
+        return(
+            <div className='lists'>
             
                  <ul className='list-group m-0 p-0 mt-2'>
                     {
@@ -34,6 +36,12 @@ const List =()=>{
              </ul>
            
         </div>
+        
     )
+
+    }else{
+        return <h2 className='text-center text-danger mt-4'>There is no Tasks!</h2>
+    }
+    
 }
 export default List
