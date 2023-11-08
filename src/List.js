@@ -5,6 +5,18 @@ import { taskContext } from './taskContext'
 const List =()=>{
     // Object Destructuring 
     const {taskItems , setTaskItems}= useContext(taskContext);
+
+    const setDoneItems = (id)=>{
+        const index = taskItems.findIndex(t=>t.id ===id);
+        let newTaskItems = [...taskItems]
+        newTaskItems[index].done = !newTaskItems[index].done;
+        setTaskItems(newTaskItems);
+    }
+
+    const handleDeleteTask = (id)=>{
+        let newTasks = taskItems.filter(t=>t.id !== id);
+        setTaskItems(newTasks);
+    }
      // Conditional Rendering
      if(taskItems.length){
         return(
@@ -18,14 +30,14 @@ const List =()=>{
                             <span> 
                                 {
                                     t.done ? (
-                                        <i className='me-3 fa fa-times text-warning '></i>
+                                        <i className='me-3 fa fa-times text-warning ' onClick={()=>setDoneItems(t.id)}></i>
                                     ):(
-                                        <i className='me-3 fa fa-check text-success '></i>
+                                        <i className='me-3 fa fa-check text-success ' onClick={()=>setDoneItems(t.id)}></i>
                                     )
                                 }
                                 
                                 
-                                <i className='me-3 fa fa-trash text-danger '></i>
+                                <i className='me-3 fa fa-trash text-danger ' onClick={()=>handleDeleteTask(t.id)}></i>
                             </span>
                         
                         </li>
